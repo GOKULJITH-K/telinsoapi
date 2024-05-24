@@ -6,6 +6,50 @@ app = FastAPI()
 
 app.include_router(router)
 
+class CropData(BaseModel):
+    N: float
+    P: float
+    K: float
+    ph:float
+    humidity: float
+    ec: float
+    temperature: float
+ 
+
+dataset = pd.read_csv('crop_data.csv')
+
+
+X = dataset[['N', 'P', 'K', 'ph', 'humidity', 'ec', 'temperature']]
+y = dataset['Crop'] 
+print(dataset.columns) 
+
+rf_classifier = RandomForestClassifier(n_estimators=100, random_state=42)
+ 
+
+rf_classifier.fit(X, y)
+
+
+def predict_crop_success(N, P, K, ph, humidity, ec, temperature):
+    input_data = [[N, P, K, ph, humidity, ec, temperature]]
+    crop_prediction = rf_classifier.predict(input_data)[0]
+    crop_probabilities = rf_classifier.predict_proba(input_data)[0]
+    max_probability_index = crop_probabilities.argmax()
+    max_probability = crop_probabilities[max_probability_index]
+    suggested_crop = rf_classifier.classes_[max_probability_index]
+    return crop_prediction, max_probability * 100, suggested_crop
+
+
+@app.post("/predictCrop")
+def predict_crop(data: CropData):
+    crop_prediction, success_percentage, suggested_crop = predict_crop_success(
+        data.N, data.P, data.K, data.ph, data.humidity, data.ec, data.temperature
+    )
+    return {
+        'crop_prediction': crop_prediction,
+        'success_percentage': success_percentage,
+        'suggested_crop': suggested_crop
+    }
+
 # from pymongo.mongo_client import MongoClient
 # from pymongo.server_api import ServerApi
 # uri = "mongodb+srv://admin:v8RcNc2VQL1D5p4m@cluster0.0bx7pop.mongodb.net/?retryWrites=true&w=majority"
