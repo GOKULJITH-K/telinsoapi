@@ -6,14 +6,7 @@ app = FastAPI()
 
 app.include_router(router)
 
-class CropData(BaseModel):
-    N: float
-    P: float
-    K: float
-    ph:float
-    humidity: float
-    ec: float
-    temperature: float
+
  
 
 dataset = pd.read_csv('crop_data.csv')
