@@ -1,5 +1,8 @@
 from fastapi import FastAPI
 from routes.route import router
+from sklearn.ensemble import RandomForestClassifier
+import pandas as pd
+
 # v8RcNc2VQL1D5p4m
 app = FastAPI()
 
