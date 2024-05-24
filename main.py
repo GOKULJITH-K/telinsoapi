@@ -32,16 +32,7 @@ def predict_crop_success(N, P, K, ph, humidity, ec, temperature):
     return crop_prediction, max_probability * 100, suggested_crop
 
 
-@app.post("/predictCrop")
-def predict_crop(data: CropData):
-    crop_prediction, success_percentage, suggested_crop = predict_crop_success(
-        data.N, data.P, data.K, data.ph, data.humidity, data.ec, data.temperature
-    )
-    return {
-        'crop_prediction': crop_prediction,
-        'success_percentage': success_percentage,
-        'suggested_crop': suggested_crop
-    }
+
 
 # from pymongo.mongo_client import MongoClient
 # from pymongo.server_api import ServerApi
