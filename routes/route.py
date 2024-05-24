@@ -27,3 +27,13 @@ def predict_crop(data: CropData):
         'success_percentage': success_percentage,
         'suggested_crop': suggested_crop
     }
+    @app.get("/predictCrop")
+def predict_crop_get(N: float, P: float, K: float, ph: float, humidity: float, ec: float, temperature: float):
+    crop_prediction, success_percentage, suggested_crop = predict_crop_success(
+        N, P, K, ph, humidity, ec, temperature
+    )
+    return {
+        'crop_prediction': crop_prediction,
+        'success_percentage': success_percentage,
+        'suggested_crop': suggested_crop
+    }
