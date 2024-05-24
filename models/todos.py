@@ -9,3 +9,12 @@ class Todo(BaseModel):
     potassium: str
     temperature: str
     ph: str
+
+class CropData(BaseModel):
+    N: float
+    P: float
+    K: float
+    ph:float
+    humidity: float
+    ec: float
+    temperature: float
