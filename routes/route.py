@@ -1,5 +1,6 @@
 from fastapi import APIRouter
 from models.todos import Todo
+from models.todos import CropData
 from config.database import collection_name
 from scheme.schemas import list_serial
 from bson import ObjectId
