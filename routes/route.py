@@ -15,3 +15,14 @@ async def get_todo():
 @router.post("/telinso")
 async def post_todo(todo: Todo):
     collection_name.insert_one(dict(todo))
+
+@router.post("/predictCrop")
+def predict_crop(data: CropData):
+    crop_prediction, success_percentage, suggested_crop = predict_crop_success(
+        data.N, data.P, data.K, data.ph, data.humidity, data.ec, data.temperature
+    )
+    return {
+        'crop_prediction': crop_prediction,
+        'success_percentage': success_percentage,
+        'suggested_crop': suggested_crop
+    }
