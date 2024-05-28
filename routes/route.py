@@ -54,7 +54,7 @@ async def predict_crop(data: CropData):
         'success_percentage': success_percentage,
         'suggested_crop': suggested_crop
     }
-   @router.get("/PredictCrop")
+   @router.get("/predictCrop")
    async def predict_crop_get(data:CropData):
     crop_prediction, success_percentage, suggested_crop = predict_crop_success(
         data.N, data.P, data.K, data.ph, data.humidity, data.ec, data.temperature
