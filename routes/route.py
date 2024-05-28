@@ -45,7 +45,7 @@ async def post_todo(todo: Todo):
     collection_name.insert_one(dict(todo))
 
 @router.post("/predictCrop")
-def predict_crop(data: CropData):
+async def predict_crop(data: CropData):
     crop_prediction, success_percentage, suggested_crop = predict_crop_success(
         data.N, data.P, data.K, data.ph, data.humidity, data.ec, data.temperature
     )
