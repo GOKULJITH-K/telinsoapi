@@ -44,13 +44,29 @@ async def get_todo():
 async def post_todo(todo: Todo):
     collection_name.insert_one(dict(todo))
 
+
+@router.get("/predictCrop")
+async def get_predict():
+    predict = list_serial(collection_name.find())
+    return predict
 @router.post("/predictCrop")
 async def predict_crop(data: CropData):
     crop_prediction, success_percentage, suggested_crop = predict_crop_success(
         data.N, data.P, data.K, data.ph, data.humidity, data.ec, data.temperature
     )
-    return {
-        'crop_prediction': crop_prediction,
-        'success_percentage': success_percentage,
-        'suggested_crop': suggested_crop
-    }
+    
+    existing_crop_data = collection_name.find_one({"username": data.username})
+    cropdata = {
+        "crop_prediction": crop_prediction,
+        "success_percentage": success_percentage,
+        "suggested_crop": suggested_crop,
+        "username":data.username,
+        "__v": 0,
+    } 
+    if existing_crop_data:
+        id_db = {"_id": existing_crop_data["_id"]}
+        collection_name.update_one(id_db, {"$set": cropdata})
+    else:
+        collection_name.insert_one(cropdata)
+        
+    
