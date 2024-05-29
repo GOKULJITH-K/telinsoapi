@@ -3,6 +3,8 @@ from models.todos import Todo
 from models.todos import CropData
 from config.database import collection_name
 from scheme.schemas import list_serial
+from config.database import collection_name2
+from scheme.schemas import list_serial2
 from bson import ObjectId
 from sklearn.ensemble import RandomForestClassifier
 import pandas as pd
