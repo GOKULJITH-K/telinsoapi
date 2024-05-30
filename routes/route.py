@@ -57,7 +57,7 @@ async def predict_crop(data: CropData):
         data.N, data.P, data.K, data.ph, data.humidity, data.ec, data.temperature
     )
     
-    existing_crop_data =await collection_name2.find_one({"username": data.username})
+    existing_crop_data = collection_name2.find_one({"username": data.username})
     cropdata = {
         "crop_prediction": crop_prediction,
         "success_percentage": success_percentage,
