@@ -12,13 +12,13 @@ class Todo(BaseModel):
 
 
 class CropData(BaseModel):
-    N: str
-    P: str
-    K: str
-    ph: str
-    humidity: str
-    ec: str
-    temperature: str
+    N: float
+    P: float
+    K: float
+    ph: float
+    humidity: float
+    ec: float
+    temperature: float
     username: str
     id: str
  
