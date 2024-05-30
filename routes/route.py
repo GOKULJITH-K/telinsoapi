@@ -67,7 +67,7 @@ async def predict_crop(data: CropData):
     } 
     if existing_crop_data:
         id_db = {"_id": existing_crop_data["_id"]}
-        await collection_name2.update_one(id_db, {"$set": cropdata})
+        collection_name2.update_one(id_db, {"$set": cropdata})
     else:
-        await collection_name2.insert_one(cropdata)
+        collection_name2.insert_one(cropdata)
     
