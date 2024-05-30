@@ -57,7 +57,7 @@ async def predict_crop(data: CropData):
         data.N, data.P, data.K, data.ph, data.humidity, data.ec, data.temperature
     )
     
-    existing_crop_data = collection_name2.find_one({"username": data.username})
+    existing_crop_data =await collection_name2.find_one({"username": data.username})
     cropdata = {
         "crop_prediction": crop_prediction,
         "success_percentage": success_percentage,
@@ -67,8 +67,7 @@ async def predict_crop(data: CropData):
     } 
     if existing_crop_data:
         id_db = {"_id": existing_crop_data["_id"]}
-        collection_name.update_one(id_db, {"$set": cropdata})
+        await collection_name2.update_one(id_db, {"$set": cropdata})
     else:
-        collection_name2.insert_one(cropdata)
-        
+        await collection_name2.insert_one(cropdata)
     
