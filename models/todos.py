@@ -9,7 +9,10 @@ class Todo(BaseModel):
     potassium: str
     temperature: str
     ph: str
+    humidity: str
+    electrical_conductivity: str
     username: str
+   
 
 
 class CropData(BaseModel):
