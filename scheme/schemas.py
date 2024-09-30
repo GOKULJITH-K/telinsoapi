@@ -6,6 +6,8 @@ def individual_serial(todo) -> dict:
         "potassium": todo["potassium"],
         "temperature": todo["temperature"],
         "ph": todo["ph"],
+        "humidity": todo["humidity"],
+        "electrical_conductivity": todo["electrical_conductivity"],
         "username": todo["username"],
     }
 
