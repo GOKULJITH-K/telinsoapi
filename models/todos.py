@@ -9,6 +9,7 @@ class Todo(BaseModel):
     potassium: str
     temperature: str
     ph: str
+    username: str
 
 
 class CropData(BaseModel):
